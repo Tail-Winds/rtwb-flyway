@@ -16,9 +16,9 @@ Flyway.
   - <http://robots4whales.whoi.edu/>
 - Natural Earth
   - <https://www.naturalearthdata.com/http//www.naturalearthdata.com/download/110m/physical/ne_110m_land.zip>
-- USA critical habitat
+- USA NARW critical habitat
   - <https://noaa.maps.arcgis.com/home/item.html?id=3115892b737a447abe2affa7e773701c>
-- CAN critical habitat
+- CAN NARW critical habitat
   - <https://open.canada.ca/data/en/dataset/db177a8c-5d7d-49eb-8290-31e6a45d786c>
 - Slow zones
 
