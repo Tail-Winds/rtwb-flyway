@@ -15,7 +15,9 @@ Flyway.
 - RTWB
 - Natural Earth
 - USA critical habitat
+  - <https://noaa.maps.arcgis.com/home/item.html?id=3115892b737a447abe2affa7e773701c>
 - CAN critical habitat
+  - <https://open.canada.ca/data/en/dataset/db177a8c-5d7d-49eb-8290-31e6a45d786c>
 - Slow zones
 
 ## Desired output
