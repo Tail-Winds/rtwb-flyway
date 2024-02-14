@@ -39,3 +39,16 @@ narw_can <- paste0(
   st_read()
 
 st_write(narw_can, 'data/spatial/narw_can.gpkg', delete_dsn = FALSE)
+
+
+## NARW seasonal management areas ----
+#   Downloaded 2024-02-14
+#
+narw_sma <- paste0(
+  "https://services2.arcgis.com/C8EMgrsFcRFL6LrL/arcgis/rest/services/",
+  "Seasonal_Management_Areas/FeatureServer/3/query?",
+  "where=gid+LIKE+%27%25%27&outFields=*&f=geojson"
+) |> 
+  st_read()
+
+st_write(narw_sma, 'data/spatial/narw_sma.gpkg', delete_dsn = FALSE)
