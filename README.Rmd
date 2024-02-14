@@ -47,3 +47,17 @@ Use GitHub Actions continuous integration to plot WHOI near-real-time whale buoy
       -   One-week running mean
       -   Two-week running mean
       -   One-month running mean
+
+```{r, echo=FALSE, message=FALSE, warning=FALSE}
+source('map.R')
+
+ggplot() +
+  geom_sf(data = coastline) +
+  geom_sf(data = rtwb_locations) +
+  geom_sf(data = narw_usa, fill = 'pink', color = NA, alpha = 0.5) +
+  coord_sf(xlim = c(-1e5, 3e5),
+           ylim = c(-5e5, 6e5),
+           crs = projection) +
+  theme_minimal() 
+```
+
