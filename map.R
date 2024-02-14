@@ -41,15 +41,54 @@ narw_can <- st_read('data/spatial/narw_can.gpkg',
                     quiet = TRUE) |> 
   st_transform(projection)
 
+# NARW SMA
+narw_sma <- st_read('data/spatial/narw_sma.gpkg',
+                    quiet = TRUE) |> 
+  st_transform(projection)
 
 library(ggplot2)
 
 
-ggplot() +
+narw_plot <- ggplot() +
   geom_sf(data = coastline) +
+  geom_sf(data = narw_sma, fill = 'red', alpha = 0.5) +
   geom_sf(data = rtwb_locations) +
   geom_sf(data = narw_usa, fill = 'pink', color = NA, alpha = 0.5) +
   coord_sf(xlim = c(-1e5, 3e5),
            ylim = c(-5e5, 6e5),
            crs = projection) +
+  labs(subtitle = 'NARW') +
   theme_minimal() 
+
+fin_plot <- ggplot() +
+  geom_sf(data = coastline) +
+  geom_sf(data = rtwb_locations) +
+  coord_sf(xlim = c(-1e5, 3e5),
+           ylim = c(-5e5, 6e5),
+           crs = projection) +
+  labs(subtitle = 'Fin whale') +
+  theme_minimal() 
+
+sei_plot <- ggplot() +
+  geom_sf(data = coastline) +
+  geom_sf(data = rtwb_locations) +
+  coord_sf(xlim = c(-1e5, 3e5),
+           ylim = c(-5e5, 6e5),
+           crs = projection) +
+  labs(subtitle = 'Sei whale') +
+  theme_minimal() 
+
+humpback_plot <- ggplot() +
+  geom_sf(data = coastline) +
+  geom_sf(data = rtwb_locations) +
+  coord_sf(xlim = c(-1e5, 3e5),
+           ylim = c(-5e5, 6e5),
+           crs = projection) +
+  labs(subtitle = 'Humpback') +
+  theme_minimal() 
+
+
+library(patchwork)
+
+narw_plot + fin_plot + sei_plot + humpback_plot +
+  plot_layout(nrow = 1, axes = 'collect')
