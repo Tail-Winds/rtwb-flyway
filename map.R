@@ -2,20 +2,9 @@ library(sf)
 # Custom Oblique Mercator projection
 projection <- st_crs("+proj=omerc +lat_0=40 +lonc=-74 +gamma=-40")
 
-# RTWB locations
-rtwb_locations <- read.csv(text = 
-  'name, latitude, longitude
-  nybnw, 40.4, -73.5
-  nybse, 40.25, -73.2
-  njatl, 39.1, -74.1
-  mdoc, 38.4, -74.6
-  vacc, 37.2, -75.2
-  vanf, 36.6, -75.4'
-) |> 
-  st_as_sf(
-    coords = c('longitude', 'latitude'),
-    crs = 4326
-  ) |> 
+# RTWB detections
+rtwb <- st_read('data/rtwb_detections.gpkg',
+                quiet = TRUE) |> 
   st_transform(projection)
 
 
@@ -25,8 +14,8 @@ coastline <- st_read('data/spatial/coastline.gpkg',
   st_make_valid() |> 
   # Crop to eastern seaboard
   st_intersection(
-    st_bbox(c(xmin = -90, xmax = -50,
-              ymin = 33, ymax = 60), crs = 4326) |> 
+    st_bbox(c(xmin = -80, xmax = -50,
+              ymin = 30, ymax = 50), crs = 4326) |> 
       st_as_sfc() 
   ) |> 
   st_transform(projection)
@@ -47,48 +36,133 @@ narw_sma <- st_read('data/spatial/narw_sma.gpkg',
   st_transform(projection)
 
 library(ggplot2)
-
-
-narw_plot <- ggplot() +
-  geom_sf(data = coastline) +
-  geom_sf(data = narw_sma, fill = 'red', alpha = 0.5) +
-  geom_sf(data = rtwb_locations) +
-  geom_sf(data = narw_usa, fill = 'pink', color = NA, alpha = 0.5) +
-  coord_sf(xlim = c(-1e5, 3e5),
-           ylim = c(-5e5, 6e5),
-           crs = projection) +
-  labs(subtitle = 'NARW') +
-  theme_minimal() 
-
-fin_plot <- ggplot() +
-  geom_sf(data = coastline) +
-  geom_sf(data = rtwb_locations) +
-  coord_sf(xlim = c(-1e5, 3e5),
-           ylim = c(-5e5, 6e5),
-           crs = projection) +
-  labs(subtitle = 'Fin whale') +
-  theme_minimal() 
-
-sei_plot <- ggplot() +
-  geom_sf(data = coastline) +
-  geom_sf(data = rtwb_locations) +
-  coord_sf(xlim = c(-1e5, 3e5),
-           ylim = c(-5e5, 6e5),
-           crs = projection) +
-  labs(subtitle = 'Sei whale') +
-  theme_minimal() 
-
-humpback_plot <- ggplot() +
-  geom_sf(data = coastline) +
-  geom_sf(data = rtwb_locations) +
-  coord_sf(xlim = c(-1e5, 3e5),
-           ylim = c(-5e5, 6e5),
-           crs = projection) +
-  labs(subtitle = 'Humpback') +
-  theme_minimal() 
-
-
 library(patchwork)
 
-narw_plot + fin_plot + sei_plot + humpback_plot +
-  plot_layout(nrow = 1, axes = 'collect')
+yesterday <- rtwb |>
+  filter(Date == Sys.Date() - 1)
+
+day_before <- rtwb |>
+  filter(Date == Sys.Date() - 2)
+
+flyway_plot <- function(data_subset){
+  narw_plot <- ggplot() + 
+    geom_sf(data = narw_usa, fill = 'pink', color = NA, alpha = 0.5) +
+    labs(subtitle = 'NARW') +
+    geom_sf(data = narw_sma, fill = 'red', alpha = 0.5) +
+    geom_sf(data = filter(data_subset, species == 'Right whale'),
+            aes(fill = detected, alpha = detected, geometry = geom),
+            show.legend = FALSE, color = NA) +
+    geom_sf(data = coastline) + 
+    scale_fill_manual(values = c("black", "red")) +
+    scale_alpha_manual(values = c(0.1, 1))+
+    coord_sf(xlim = c(-1e5, 3e5),
+             ylim = c(-5e5, 6e5),
+             crs = projection) +
+    theme_minimal()
+  
+  fin_plot <- ggplot() +
+    geom_sf(data = filter(data_subset, species == 'Fin whale'),
+            aes(fill = detected, alpha = detected, geometry = geom),
+            show.legend = FALSE, color = "black") +
+    geom_sf(data = coastline) +
+    geom_sf(data = st_centroid(filter(data_subset, species == 'Fin whale'))) +
+    scale_fill_manual(values = c("black", "red")) +
+    scale_alpha_manual(values = c(0.1, 1))+
+    coord_sf(xlim = c(-1e5, 3e5),
+             ylim = c(-5e5, 6e5),
+             crs = projection) +
+    labs(subtitle = 'Fin whale') +
+    theme_minimal()
+  
+  sei_plot <- base +
+    geom_sf(data = filter(data_subset, species == 'Sei whale'),
+            aes(fill = detected, alpha = detected, geometry = geom),
+            show.legend = FALSE, color = NA) +
+    scale_fill_manual(values = c("black", "red")) +
+    scale_alpha_manual(values = c(0.1, 1)) +
+    coord_sf(xlim = c(-1e5, 3e5),
+             ylim = c(-5e5, 6e5),
+             crs = projection) +
+    labs(subtitle = 'Sei whale') +
+    theme_minimal()
+  
+  humpback_plot <- base +
+    geom_sf(data = filter(data_subset, species == 'Humpback whale'),
+            aes(fill = detected, alpha = detected, geometry = geom),
+            show.legend = FALSE, color = NA) +
+    scale_fill_manual(values = c("black", "red")) +
+    scale_alpha_manual(values = c(0.1, 1)) +
+    coord_sf(xlim = c(-1e5, 3e5),
+             ylim = c(-5e5, 6e5),
+             crs = projection) +
+    labs(subtitle = 'Humpback') +
+    theme_minimal() 
+  
+  
+  
+  narw_plot + fin_plot + sei_plot + humpback_plot +
+    plot_layout(nrow = 1)
+}
+
+flyway_plot(yesterday)
+flyway_plot(day_before)
+
+data_subset <- rtwb |> 
+  filter(Date %in% seq.Date(Sys.Date() - 7, Sys.Date() - 1, by = "day")) |> 
+  group_by(species, station) |> 
+  summarize(pct = n() / 7)
+
+flyway_plot_summary <- function(data_subset){
+  narw_plot <-
+    ggplot() + 
+    geom_sf(data = narw_usa, fill = 'pink', color = NA, alpha = 0.5) +
+    labs(subtitle = 'NARW') +
+    geom_sf(data = narw_sma, fill = 'red', alpha = 0.5) +
+    geom_sf(data = filter(one_week, species == 'Right whale'),
+            aes(fill = pct, geometry = geom),
+           color = NA) +
+    scale_fill_viridis_c(option = "H") +
+    geom_sf(data = coastline) + 
+    coord_sf(xlim = c(-1e5, 3e5),
+             ylim = c(-5e5, 6e5),
+             crs = projection) +
+    theme_minimal()
+  
+  fin_plot <- ggplot() +
+    geom_sf(data = filter(data_subset, species == 'Fin whale'),
+            aes(fill = pct, geometry = geom),
+             color = "black") +
+    geom_sf(data = coastline) +
+    geom_sf(data = st_centroid(filter(data_subset, species == 'Fin whale'))) +
+    coord_sf(xlim = c(-1e5, 3e5),
+             ylim = c(-5e5, 6e5),
+             crs = projection) +
+    labs(subtitle = 'Fin whale') +
+    theme_minimal()
+  
+  sei_plot <- base +
+    geom_sf(data = filter(data_subset, species == 'Sei whale'),
+            aes(fill = pct, geometry = geom), color = NA) +
+    coord_sf(xlim = c(-1e5, 3e5),
+             ylim = c(-5e5, 6e5),
+             crs = projection) +
+    labs(subtitle = 'Sei whale') +
+    theme_minimal()
+  
+  humpback_plot <- base +b
+    geom_sf(data = filter(data_subset, species == 'Humpback whale'),
+            aes(fill = pct, geometry = geom),
+             color = NA) +
+    coord_sf(xlim = c(-1e5, 3e5),
+             ylim = c(-5e5, 6e5),
+             crs = projection) +
+    labs(subtitle = 'Humpback') +
+    theme_minimal() 
+  
+  
+  
+  narw_plot + fin_plot + sei_plot + humpback_plot +
+    plot_layout(nrow = 1, guides = 'collect') +scale_color_viridis_c(option = "B")
+}
+
+flyway_plot_summary(one_week)

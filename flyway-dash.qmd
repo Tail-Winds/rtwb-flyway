@@ -1,0 +1,23 @@
+---
+title: "Near-real-time Whale Buoy Flyway"
+format: dashboard
+editor: visual
+---
+```{r}
+library(targets)
+```
+
+## Row
+```{r}
+tar_read(yesterday)
+```
+```{r}
+tar_read(day_before)
+```
+## Row
+```{r}
+tar_read(last_week)
+```
+```{r}
+tar_read(last_month)
+```
