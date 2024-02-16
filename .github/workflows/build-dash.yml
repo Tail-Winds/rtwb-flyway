@@ -2,8 +2,7 @@
 # <https://github.com/gadenbuie/mynorfolk-dash/blob/main/.github/workflows/build-dash.yaml>
 on:
   push:
-    branches:
-      - main
+    branches: [main]
     paths:
       - '**.qmd'
       - '**.R'
@@ -68,7 +67,7 @@ jobs:
       run: Rscript -e 'targets::tar_make()'
       
     - name: Build README
-      run: Rscript -e 'knitr::knit("README.Rmd")'
+      run: Rscript -e 'rmarkdown::render("README.Rmd")'
       
     - name: Update RTWB log
       run: Rscript -e 'write.csv(
