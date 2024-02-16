@@ -53,6 +53,7 @@ jobs:
           any::lubridate
           any::ggplot2
           any::patchwork
+          any::quarto
 
     - name: Cache targets data
       uses: actions/cache@v4
