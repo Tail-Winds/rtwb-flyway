@@ -66,6 +66,9 @@ jobs:
 
     - name: Build Pipeline and Dashboard
       run: Rscript -e 'targets::tar_make()'
+      
+    - name: Build README
+      run: Rscript -e 'knitr::knit("README.Rmd")'
 
     - name: Was the dashboard updated?
       id: dashboard-updated
