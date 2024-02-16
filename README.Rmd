@@ -17,7 +17,11 @@ knitr::opts_chunk$set(
 
 <!-- badges: end -->
 
-Use GitHub Actions continuous integration to plot WHOI near-real-time whale buoy (RTWB) detections for various species in the Mid-Atlantic Flyway.
+Currently deployed at <https://tailwinds.umces.edu/rtwb-flyway>
+
+## What is this?
+
+Use [R targets](https://docs.ropensci.org/targets/) and GitHub Actions continuous integration to plot WHOI near-real-time whale buoy (RTWB) detections for various species in the Mid-Atlantic Flyway.
 
 Basically, an in-house version of <https://whalemap.org/> that also includes fin, sei, and humpback whales.
 
@@ -57,6 +61,15 @@ Dashboard is updated every day at 05:00 UTC or on demand. The last run occurred 
     -   Two-week running mean
     -   One-month running mean
 
+## Example plot
+
 ```{r, echo=FALSE, message=FALSE, warning=FALSE}
 targets::tar_read(yesterday)
 ```
+
+## Current workflow
+
+```{r, echo=FALSE, results='asis'}
+cat(c("```{mermaid}", targets::tar_mermaid(), "```"), sep = "\n")
+```
+
