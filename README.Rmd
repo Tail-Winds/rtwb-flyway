@@ -68,8 +68,13 @@ targets::tar_read(yesterday)
 ```
 
 ## Current workflow
+```{r, echo=FALSE, error=FALSE, warning=FALSE, message=FALSE}
+invisible({capture.output({
+mermaid <- targets::tar_mermaid()
+})})
+```
 
-```{r, echo=FALSE, results='asis'}
-cat(c("```{mermaid}", targets::tar_mermaid(), "```"), sep = "\n")
+```{r, echo=FALSE, results="asis"}
+cat(c("```{mermaid}", mermaid, "```"), sep = "\n")
 ```
 
