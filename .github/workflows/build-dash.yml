@@ -42,17 +42,18 @@ jobs:
       uses: r-lib/actions/setup-r-dependencies@v2
       with:
         packages:
-          any::knitr
-          any::rmarkdown
-          any::targets
-          any::tarchetypes
-          any::rvest
           any::dplyr
-          any::tidyr
-          any::sf
-          any::lubridate
           any::ggplot2
+          any::knitr
+          any::lubridate
+          any::rmarkdown
           any::patchwork
+          any::rvest
+          any::sf
+          any::tarchetypes
+          any::targets
+          any::tidyr
+          any::qs
           any::quarto
 
     - name: Cache targets data
