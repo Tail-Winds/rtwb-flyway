@@ -67,14 +67,7 @@ Dashboard is updated every day at 05:00 UTC or on demand. The last run occurred 
 targets::tar_read(yesterday)
 ```
 
-## Current workflow
-```{r, echo=FALSE, error=FALSE, warning=FALSE, message=FALSE}
-invisible({capture.output({
-mermaid <- targets::tar_mermaid()
-})})
-```
-
 ```{r, echo=FALSE, results="asis"}
-cat(c("```{mermaid}", mermaid, "```"), sep = "\n")
+cat(c("``` mermaid", targets::tar_mermaid(), "```"), sep = "\n")
 ```
 
