@@ -39,28 +39,28 @@ jobs:
     #   run: sudo apt-get install libglpk40
 
     - name: Set up R packages
-        uses: r-lib/actions/setup-r-dependencies@v2
-        with:
-          packages:
-            any::knitr
-            any::rmarkdown
-            any::targets
-            any::tarchetypes
-            any::rvest
-            any::dplyr
-            any::tidyr
-            any::sf
-            any::lubridate
-            any::ggplot2
-            any::patchwork
+      uses: r-lib/actions/setup-r-dependencies@v2
+      with:
+        packages:
+          any::knitr
+          any::rmarkdown
+          any::targets
+          any::tarchetypes
+          any::rvest
+          any::dplyr
+          any::tidyr
+          any::sf
+          any::lubridate
+          any::ggplot2
+          any::patchwork
 
     - name: Cache targets data
       uses: actions/cache@v4
       with:
-          path: _targets
-          key: ${{ runner.os }}-targets-v1-${{ hashFiles('**/cache.log') }}
-          restore-keys: |
-              ${{ runner.os }}-targets-v1-
+        path: _targets
+        key: ${{ runner.os }}-targets-v1-${{ hashFiles('**/cache.log') }}
+        restore-keys: |
+            ${{ runner.os }}-targets-v1-
 
     - name: Build Pipeline and Dashboard
       run: Rscript -e 'targets::tar_make()'
