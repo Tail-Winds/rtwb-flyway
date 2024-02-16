@@ -6,7 +6,8 @@
 <!-- badges: start -->
 <!-- badges: end -->
 
-Currently deployed at <https://tailwinds.umces.edu/rtwb-flyway>
+This dashboard is currently deployed at
+<https://tailwinds.umces.edu/rtwb-flyway>.
 
 ## What is this?
 
@@ -57,6 +58,8 @@ occurred at 2024-02-16 20:09:04.
 ## Example plot
 
 ![](README_files/figure-gfm/unnamed-chunk-2-1.png)<!-- -->
+
+## Repository `targets` workflow:
 
 ``` mermaid
 graph LR
