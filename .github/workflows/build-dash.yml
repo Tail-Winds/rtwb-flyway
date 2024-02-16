@@ -69,6 +69,9 @@ jobs:
       
     - name: Build README
       run: Rscript -e 'knitr::knit("README.Rmd")'
+      
+    - name: Update RTWB log
+      run: Rscript -e 'write.csv(sf::st_drop_geometry(tar_read(whale_detections)), "rtwb_detections.csv", row.names=FALSE)'
 
     - name: Was the dashboard updated?
       id: dashboard-updated
