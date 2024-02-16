@@ -3,21 +3,36 @@ title: "Near-real-time Whale Buoy Flyway"
 format: dashboard
 editor: visual
 ---
+
 ```{r}
 library(targets)
+last_update <- tar_meta(names = "whale_detections")$time
+```
+
+Last updated: `r last_update`
+
+## Row {height=45%}
+### Column
+```{r}
+cat("title=", as.character(as.Date(last_update) - 1))
+tar_read(yesterday)
+```
+### Column
+```{r}
+cat("title=", as.character(as.Date(last_update) - 2))
+tar_read(day_before)
 ```
 
 ## Row
+### Column
 ```{r}
-tar_read(yesterday)
-```
-```{r}
-tar_read(day_before)
-```
-## Row
-```{r}
+cat("title=", "Last week, ", as.character(as.Date(last_update) - 7), "to",
+    as.character(as.Date(last_update) - 1))
 tar_read(last_week)
 ```
+### Column
 ```{r}
+cat("title=", "Last month, ", as.character(as.Date(last_update) - 31), "to",
+    as.character(as.Date(last_update) - 1))
 tar_read(last_month)
 ```

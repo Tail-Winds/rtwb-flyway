@@ -9,9 +9,11 @@ library(tarchetypes) # Load other packages as needed.
 
 # Set target options:
 tar_option_set(
-  packages = c("rvest", "dplyr", "tidyr", "lubridate", "sf", "ggplot2",
-               "patchwork") # packages that your targets need to run
-  # format = "qs", # Optionally set the default storage format. qs is fast.
+  packages = c(
+    "rvest", "dplyr", "tidyr", "lubridate", "sf", "ggplot2",
+    "patchwork"
+  ), 
+  format = "qs"
   #
   # For distributed computing in tar_make(), supply a {crew} controller
   # as discussed at https://books.ropensci.org/targets/crew.html.
@@ -45,8 +47,7 @@ tar_option_set(
 # Install packages {{future}}, {{future.callr}}, and {{future.batchtools}} to allow use_targets() to configure tar_make_future() options.
 
 # Run the R scripts in the R/ folder with your custom functions:
-source('scrapers/r4w_scraper.R')
-source('map_functions.R')
+tar_source("targets_functions")
 # source("other_functions.R") # Source other scripts as needed.
 
 # Replace the target list below with your own:
@@ -81,9 +82,10 @@ list(
     name = detection_range,
     command = st_read('data/spatial/detection_range_key.gpkg')
   ),
-  tar_target(
+  tar_age(
     name = whale_detections_raw,
     command = r4w_scrape(rtwb_urls),
+    age = as.difftime(23, units = "hours"),
     pattern = map(rtwb_urls)
   ),
   tar_target(
@@ -97,8 +99,7 @@ list(
       whale_detections[whale_detections$Date == Sys.Date() - 1,],
       narw_usa = narw_critical_habitat,
       narw_sma = narw_seasonal_management_areas,
-      coastline = coastline_midatl,
-      title = 'Yesterday'
+      coastline = coastline_midatl
     )
   ),
   tar_target(
@@ -107,8 +108,7 @@ list(
       whale_detections[whale_detections$Date == Sys.Date() - 2,],
       narw_usa = narw_critical_habitat,
       narw_sma = narw_seasonal_management_areas,
-      coastline = coastline_midatl,
-      title = "Two days ago"
+      coastline = coastline_midatl
     )
   ),
   tar_target(
@@ -120,21 +120,24 @@ list(
         summarize(pct = n() / 7),
       narw_usa = narw_critical_habitat,
       narw_sma = narw_seasonal_management_areas,
-      coastline = coastline_midatl,
-      title = "Last week summary"
+      coastline = coastline_midatl
     )
   ),
   tar_target(
     name = last_month,
     command = flyway_plot_summary(
       whale_detections |> 
-        filter(Date %in% seq.Date(Sys.Date() - 30, Sys.Date() - 1, by = "day")) |> 
+        filter(Date %in% seq.Date(Sys.Date() - 31, Sys.Date() - 1, by = "day")) |> 
         group_by(species, station) |> 
-        summarize(pct = n() / 7),
+        summarize(pct = n() / 30),
       narw_usa = narw_critical_habitat,
       narw_sma = narw_seasonal_management_areas,
-      coastline = coastline_midatl,
-      title = "Last month summary"
+      coastline = coastline_midatl
     )
+  ),
+  
+  tar_quarto(
+    flyway_dashboard,
+    "index.qmd"
   )
 )

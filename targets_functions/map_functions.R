@@ -1,8 +1,7 @@
 flyway_plot <- function(data_subset,
                         narw_usa,
                         narw_sma,
-                        coastline,
-                        title){
+                        coastline){
   # narw_sma <- 
   projection <- st_crs("+proj=omerc +lat_0=40 +lonc=-74 +gamma=-40")
   coastline <- st_transform(coastline, projection)
@@ -68,8 +67,7 @@ flyway_plot <- function(data_subset,
   
   
   narw_plot + fin_plot + sei_plot + humpback_plot +
-    plot_layout(nrow = 1)+
-    plot_annotation(subtitle = title)
+    plot_layout(nrow = 1)
 }
 
 
@@ -77,8 +75,7 @@ flyway_plot <- function(data_subset,
 flyway_plot_summary <- function(data_subset,
                                 narw_usa,
                                 narw_sma,
-                                coastline,
-                                title){
+                                coastline){
   projection <- st_crs("+proj=omerc +lat_0=40 +lonc=-74 +gamma=-40")
   coastline <- st_transform(coastline, projection)
   narw_usa <- st_transform(narw_usa, projection)
@@ -140,6 +137,5 @@ flyway_plot_summary <- function(data_subset,
   
   
   narw_plot + fin_plot + sei_plot + humpback_plot +
-    plot_layout(nrow = 1, guides = 'collect') +
-    plot_annotation(subtitle = title)
+    plot_layout(nrow = 1, guides = 'collect')
 }
