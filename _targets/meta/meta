@@ -1,25 +1,25 @@
 name|type|data|command|depend|seed|path|time|size|bytes|format|repository|iteration|parent|children|seconds|warnings|error
-.Random.seed|object|352e99ad53788810|||||||||||||||
+.Random.seed|object|9074e52eac33a4c1|||||||||||||||
 add_detection_range|function|b96982dd8f10e180|||||||||||||||
 coastline|stem|ac1cc34439cfc816|3653359ab2707600|ef46db3751d8e999|325118538||t19769.8395705549s|6ff5bf080a31ddea|66046|qs|local|vector|||0.067||
 coastline_midatl|stem|ed0a2bb8c3e18e79|0ed561b2b1801794|312a13b28c20e147|-1044503334||t19769.8396323142s|e2756f71d795f0e2|2553|qs|local|vector|||0.018|attribute variables are assumed to be spatially constant throughout all geometries|
-day_before|stem|b113b4d1f36a71af|f9e934c5f1c2b842|e1d4336b35b9f88e|1788355544||t19769.8396364809s|90a221ca33d75eda|8840372|qs|local|vector|||0.208|st_centroid assumes attributes are constant over geometries|
+day_before|stem|254630acaeb9fe63|f9e934c5f1c2b842|b75ab909c9f68f2e|1788355544||t19771.2110040732s|8dd17f79c0b0ed8d|8840385|qs|local|vector|||0.21|st_centroid assumes attributes are constant over geometries|
 detection_range|stem|56ff6f8376d4acb1|904105a553c688ef|ef46db3751d8e999|-1981753662||t19769.8395707401s|01db5afc1c110469|147917|qs|local|vector|||0.006||
-flyway_dashboard|stem|12f99baed3f80388|db83f97d776d675f|a8f626e63ec730f1|1560841674|index_files*index.html*index.qmd|t19769.8398099998s|4780994bee61e26c|4052671|file|local|vector|||8.91||
+flyway_dashboard|stem|205ef82148ba5140|db83f97d776d675f|36b64bd5d1a69232|1560841674|index_files*index.html*index.qmd|t19771.2111732406s|598d2b035d2ff47a|4051526|file|local|vector|||8.388||
 flyway_plot|function|7f04587acb04b3e4|||||||||||||||
 flyway_plot_summary|function|331e971fc32bec10|||||||||||||||
-last_month|stem|c75c75b24830533e|06f0d4172fa5669e|8cc0d9ef473e0446|-676137764||t19769.8396894902s|75eaa91a20b21285|8812574|qs|local|vector|||4.228|st_centroid assumes attributes are constant over geometries|
-last_week|stem|72aade88059d3c75|0ba98c49b14db128|8cc0d9ef473e0446|1747496466||t19769.8397070365s|22be8011b6224a65|8812648|qs|local|vector|||1.391|st_centroid assumes attributes are constant over geometries|
+last_month|stem|c13c7d4bbc18a1a2|06f0d4172fa5669e|7f49638fcfc62925|-676137764||t19771.2110581938s|378f307cb3c400b7|8812570|qs|local|vector|||4.322|st_centroid assumes attributes are constant over geometries|
+last_week|stem|c475c93362ee4fac|0ba98c49b14db128|7f49638fcfc62925|1747496466||t19771.2110762494s|b78e620932fbf88b|8812616|qs|local|vector|||1.433|st_centroid assumes attributes are constant over geometries|
 narw_critical_habitat|stem|3a1ac4ed0b79a71e|ae0504cedaa1fae2|ef46db3751d8e999|678332988||t19769.8395697216s|12de3d63ce21a8ce|91565|qs|local|vector|||0.007||
 narw_seasonal_management_areas|stem|c45bfc436925f2d0|8048d66952624327|ef46db3751d8e999|879478107||t19769.8395693512s|4e0898a0bfd869bd|1085048|qs|local|vector|||0.984||
 r4w_scrape|function|62c1a66a53ff2aaf|||||||||||||||
 rtwb_urls|stem|6f54f5861cbd3481|bd51348e96f0b417|ef46db3751d8e999|2077449520||t19769.8395695827s|97f5d5ebb4412369|161|qs|local|vector||rtwb_urls_e431a5bd*rtwb_urls_f70446b5*rtwb_urls_51141fc6*rtwb_urls_a1aca101*rtwb_urls_7f996d54*rtwb_urls_3236b994|0.006||
-whale_detections|stem|9ee37cd1c71fda8e|b344bbc8ee8713fc|0ce7b931d272fb0a|-707888931||t19769.8396328235s|d92a0595904d98cf|1657567|qs|local|vector|||0.014||
-whale_detections_raw|pattern|38cf8b51693a896b|c8872dd6e2fc67e8||1715974225||||3314|qs|local|vector||whale_detections_raw_4390a057*whale_detections_raw_5dc403fb*whale_detections_raw_ccf8066e*whale_detections_raw_03320586*whale_detections_raw_b7c04080*whale_detections_raw_ab38313c|5.268||
-whale_detections_raw_03320586|branch|0cb43559b599a37a|c8872dd6e2fc67e8|728424f37a0daef6|149345334||t19769.8396278697s|4caf1485e6baa7cf|712|qs|local|vector|whale_detections_raw||0.284||
-whale_detections_raw_4390a057|branch|604fbc663b231664|c8872dd6e2fc67e8|728424f37a0daef6|-1692143564||t19769.8396202772s|034d99188663e658|707|qs|local|vector|whale_detections_raw||4.273||
-whale_detections_raw_5dc403fb|branch|9eee26836d1c7615|c8872dd6e2fc67e8|728424f37a0daef6|1771971969||t19769.8396230086s|d50aea1d6ad178da|327|qs|local|vector|whale_detections_raw||0.235||
-whale_detections_raw_ab38313c|branch|d017995083e971e2|c8872dd6e2fc67e8|728424f37a0daef6|1247271780||t19769.8396320364s|be91d6af8b5b13e0|579|qs|local|vector|whale_detections_raw||0.177||
-whale_detections_raw_b7c04080|branch|a5f7fe4695a2413c|c8872dd6e2fc67e8|728424f37a0daef6|2026040720||t19769.8396299068s|4e7818a2d57934b5|736|qs|local|vector|whale_detections_raw||0.172||
-whale_detections_raw_ccf8066e|branch|fd041e93a7cc252a|c8872dd6e2fc67e8|728424f37a0daef6|672444194||t19769.8396245364s|bd9cdb2e6c3ecc89|253|qs|local|vector|whale_detections_raw||0.127||
-yesterday|stem|ca10dd764554e755|60f2e49e1dfff735|e1d4336b35b9f88e|-1178317174||t19769.8396391198s|577f3c69f98b235d|8840348|qs|local|vector|||0.124|st_centroid assumes attributes are constant over geometries|
+whale_detections|stem|ab8bb3fab02a9218|b344bbc8ee8713fc|14325e1fa5392912|-707888931||t19771.2110005084s|d86e4e12239c627d|1687520|qs|local|vector|||0.015||
+whale_detections_raw|pattern|d11ae21ebbb7c5dc|c8872dd6e2fc67e8||1715974225||||3328|qs|local|vector||whale_detections_raw_4390a057*whale_detections_raw_5dc403fb*whale_detections_raw_ccf8066e*whale_detections_raw_03320586*whale_detections_raw_b7c04080*whale_detections_raw_ab38313c|1.435||
+whale_detections_raw_03320586|branch|30086a7e82111969|c8872dd6e2fc67e8|728424f37a0daef6|149345334||t19771.210993888s|06f2499ce5dc01d0|718|qs|local|vector|whale_detections_raw||0.172||
+whale_detections_raw_4390a057|branch|6c065156fcabedb9|c8872dd6e2fc67e8|728424f37a0daef6|-1692143564||t19771.210987962s|72687070e44f8593|706|qs|local|vector|whale_detections_raw||0.423||
+whale_detections_raw_5dc403fb|branch|abc80ce5925fd240|c8872dd6e2fc67e8|728424f37a0daef6|1771971969||t19771.2109901842s|0d85b7b0c9d906fe|328|qs|local|vector|whale_detections_raw||0.187||
+whale_detections_raw_ab38313c|branch|9e7acf1c12ebf196|c8872dd6e2fc67e8|728424f37a0daef6|1247271780||t19771.2109999065s|0f150c5f10832ff6|582|qs|local|vector|whale_detections_raw||0.173||
+whale_detections_raw_b7c04080|branch|c67f94fc8d18eb9f|c8872dd6e2fc67e8|728424f37a0daef6|2026040720||t19771.2109978695s|b768230cdbc96fc9|735|qs|local|vector|whale_detections_raw||0.341||
+whale_detections_raw_ccf8066e|branch|ab7111d6dcbb807a|c8872dd6e2fc67e8|728424f37a0daef6|672444194||t19771.2109918046s|69b02e48156a7fcc|259|qs|local|vector|whale_detections_raw||0.139||
+yesterday|stem|7a356a792f7fdb8b|60f2e49e1dfff735|b75ab909c9f68f2e|-1178317174||t19771.2110066658s|3db53b8d918ed259|8677481|qs|local|vector|||0.119|st_centroid assumes attributes are constant over geometries|
