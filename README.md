@@ -20,7 +20,7 @@ Basically, an in-house version of <https://whalemap.org/> that also
 includes fin, sei, and humpback whales.
 
 Dashboard is updated every day at 05:00 UTC or on demand. The last run
-occurred at 2024-02-24 05:04:29.
+occurred at 2024-02-25 05:03:54.
 
 ## Data sources
 
