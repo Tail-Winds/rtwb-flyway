@@ -94,12 +94,20 @@ list(
   ),
   
   tar_target(
+    name = slow_zones,
+    command = scrape_slow_zones(
+      "https://www.fisheries.noaa.gov/national/endangered-species-conservation/reducing-vessel-strikes-north-atlantic-right-whales"
+    )),
+  
+  tar_target(
     name = yesterday,
     command = flyway_plot(
       whale_detections[whale_detections$Date == Sys.Date() - 1,],
       narw_usa = narw_critical_habitat,
       narw_sma = narw_seasonal_management_areas,
-      coastline = coastline_midatl
+      coastline = coastline_midatl,
+      slow_zones = slow_zones[slow_zones$start_date <= Sys.Date() - 1 &
+                                slow_zones$end_date >= Sys.Date() - 1]
     )
   ),
   tar_target(
@@ -108,7 +116,9 @@ list(
       whale_detections[whale_detections$Date == Sys.Date() - 2,],
       narw_usa = narw_critical_habitat,
       narw_sma = narw_seasonal_management_areas,
-      coastline = coastline_midatl
+      coastline = coastline_midatl,
+      slow_zones = slow_zones[slow_zones$start_date <= Sys.Date() - 2 &
+                                slow_zones$end_date >= Sys.Date() - 2]
     )
   ),
   tar_target(
@@ -120,7 +130,9 @@ list(
         summarize(pct = n() / 7),
       narw_usa = narw_critical_habitat,
       narw_sma = narw_seasonal_management_areas,
-      coastline = coastline_midatl
+      coastline = coastline_midatl,
+      slow_zones = slow_zones[slow_zones$start_date <= Sys.Date() - 1 &
+                                slow_zones$end_date >= Sys.Date() - 1]
     )
   ),
   tar_target(
@@ -132,7 +144,9 @@ list(
         summarize(pct = n() / 30),
       narw_usa = narw_critical_habitat,
       narw_sma = narw_seasonal_management_areas,
-      coastline = coastline_midatl
+      coastline = coastline_midatl,
+      slow_zones = slow_zones[slow_zones$start_date <= Sys.Date() - 1 &
+                                slow_zones$end_date >= Sys.Date() - 1]
     )
   ),
   
