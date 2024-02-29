@@ -15,7 +15,7 @@ scrape_slow_zones <- function(url) {
   sz <- sz |> 
     lapply(FUN = function(x) {
       # pull name
-      sz_id <- gsub(" Acoustic.*", "", x[1])
+      sz_id <- gsub(" Acoustic.*| DMA.*", "", x[1])
       
       # pull date
       start_date <- paste(
@@ -40,7 +40,7 @@ scrape_slow_zones <- function(url) {
         st_cast('POLYGON') |> 
         st_sfc(crs = 4326)
       
-      data.frame(id = sz_id, start_date, end_date, geom = bounds) |> 
+      data.frame(location = sz_id, start_date, end_date, geom = bounds) |> 
         st_as_sf()
     }) |> 
     do.call(rbind, args = _)

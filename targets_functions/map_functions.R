@@ -78,16 +78,18 @@ flyway_plot <- function(data_subset,
 flyway_plot_summary <- function(data_subset,
                                 narw_usa,
                                 narw_sma,
+                                slow_zones,
                                 coastline){
   projection <- st_crs("+proj=omerc +lat_0=40 +lonc=-74 +gamma=-40")
   coastline <- st_transform(coastline, projection)
   narw_usa <- st_transform(narw_usa, projection)
   narw_sma <- st_transform(narw_sma, projection)
-  
+  sz <- st_transform(slow_zones, projection)
   data_subset <- st_transform(data_subset, projection)
   
   narw_plot <-
     ggplot() + 
+    geom_sf(data = sz, fill = 'yellow', color = NA) +
     geom_sf(data = narw_usa, fill = 'pink', color = NA, alpha = 0.5) +
     labs(subtitle = 'NARW') +
     geom_sf(data = narw_sma, fill = 'red', alpha = 0.5) +

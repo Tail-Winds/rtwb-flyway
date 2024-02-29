@@ -107,7 +107,7 @@ list(
       narw_sma = narw_seasonal_management_areas,
       coastline = coastline_midatl,
       slow_zones = slow_zones[slow_zones$start_date <= Sys.Date() - 1 &
-                                slow_zones$end_date >= Sys.Date() - 1]
+                                slow_zones$end_date >= Sys.Date() - 1,]
     )
   ),
   tar_target(
@@ -118,7 +118,7 @@ list(
       narw_sma = narw_seasonal_management_areas,
       coastline = coastline_midatl,
       slow_zones = slow_zones[slow_zones$start_date <= Sys.Date() - 2 &
-                                slow_zones$end_date >= Sys.Date() - 2]
+                                slow_zones$end_date >= Sys.Date() - 2,]
     )
   ),
   tar_target(
@@ -132,7 +132,7 @@ list(
       narw_sma = narw_seasonal_management_areas,
       coastline = coastline_midatl,
       slow_zones = slow_zones[slow_zones$start_date <= Sys.Date() - 1 &
-                                slow_zones$end_date >= Sys.Date() - 1]
+                                slow_zones$end_date >= Sys.Date() - 1,]
     )
   ),
   tar_target(
@@ -146,7 +146,7 @@ list(
       narw_sma = narw_seasonal_management_areas,
       coastline = coastline_midatl,
       slow_zones = slow_zones[slow_zones$start_date <= Sys.Date() - 1 &
-                                slow_zones$end_date >= Sys.Date() - 1]
+                                slow_zones$end_date >= Sys.Date() - 1,]
     )
   ),
   
