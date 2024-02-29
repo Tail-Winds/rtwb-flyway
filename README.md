@@ -4,6 +4,7 @@
 # rtwb-flyway
 
 <!-- badges: start -->
+
 <!-- badges: end -->
 
 This dashboard is currently deployed at
@@ -19,41 +20,41 @@ Basically, an in-house version of <https://whalemap.org/> that also
 includes fin, sei, and humpback whales.
 
 Dashboard is updated every day at 05:00 UTC or on demand. The last run
-occurred at 2024-02-29 05:09:23.
+occurred at 2024-02-29 18:34:47.
 
 ## Data sources
 
-- RTWB
-  - <http://robots4whales.whoi.edu/>
-- Natural Earth
-  - <https://www.naturalearthdata.com/http//www.naturalearthdata.com/download/110m/physical/ne_110m_land.zip>
-- USA NARW critical habitat
-  - <https://noaa.maps.arcgis.com/home/item.html?id=3115892b737a447abe2affa7e773701c>
-- CAN NARW critical habitat
-  - <https://open.canada.ca/data/en/dataset/db177a8c-5d7d-49eb-8290-31e6a45d786c>
-- NOAA NARW seasonal management areas
-  - <https://www.fisheries.noaa.gov/resource/map/north-atlantic-right-whale-seasonal-management-areas-sma>  
-- Slow zones
+  - RTWB
+      - <http://robots4whales.whoi.edu/>
+  - Natural Earth
+      - <https://www.naturalearthdata.com/http//www.naturalearthdata.com/download/110m/physical/ne_110m_land.zip>
+  - USA NARW critical habitat
+      - <https://noaa.maps.arcgis.com/home/item.html?id=3115892b737a447abe2affa7e773701c>
+  - CAN NARW critical habitat
+      - <https://open.canada.ca/data/en/dataset/db177a8c-5d7d-49eb-8290-31e6a45d786c>
+  - NOAA NARW seasonal management areas
+      - <https://www.fisheries.noaa.gov/resource/map/north-atlantic-right-whale-seasonal-management-areas-sma>  
+  - Slow zones
 
 ## Desired output
 
-- Table with columns:
-  - date
-  - species
-  - detected
-  - slow_zone_id
-  - slow_zone_active
-- Figures (5; 4 facets, 1 per species):
-  - All:
-    - [x] Coastline in OMERC projection
-    - [x] Critical habitat polygons
-  - Yesterday: 4 plots, 1 per species
-    - RTWB location filled if present, point if absent
-    - slow zone polygon filled if active, transparent if not
-  - 2 days ago
-  - One-week running mean
-  - Two-week running mean
-  - One-month running mean
+  - Table with columns:
+      - date
+      - species
+      - detected
+      - slow\_zone\_id
+      - slow\_zone\_active
+  - Figures (5; 4 facets, 1 per species):
+      - All:
+          - [x] Coastline in OMERC projection
+          - [x] Critical habitat polygons
+      - Yesterday: 4 plots, 1 per species
+          - RTWB location filled if present, point if absent
+          - slow zone polygon filled if active, transparent if not
+      - 2 days ago
+      - One-week running mean
+      - Two-week running mean
+      - One-month running mean
 
 ## Example plot
 
@@ -77,11 +78,13 @@ graph LR
     x006ddd8351612b3e>"flyway_plot_summary"]:::uptodate --> x5143ae3bdfbc5e1b(["last_month"]):::uptodate
     x32f78397cebde190(["narw_critical_habitat"]):::uptodate --> x5143ae3bdfbc5e1b(["last_month"]):::uptodate
     x17b3c6c5f2f97a8a(["narw_seasonal_management_areas"]):::uptodate --> x5143ae3bdfbc5e1b(["last_month"]):::uptodate
+    xe2cc1738a9b9cdfb(["slow_zones"]):::uptodate --> x5143ae3bdfbc5e1b(["last_month"]):::uptodate
     x5fc1f85cdae42a15(["whale_detections"]):::uptodate --> x5143ae3bdfbc5e1b(["last_month"]):::uptodate
     x9f056268bcaf484c(["coastline_midatl"]):::uptodate --> xfd50dd5ee08cb00e(["yesterday"]):::uptodate
     x29978318f74a1f1a>"flyway_plot"]:::uptodate --> xfd50dd5ee08cb00e(["yesterday"]):::uptodate
     x32f78397cebde190(["narw_critical_habitat"]):::uptodate --> xfd50dd5ee08cb00e(["yesterday"]):::uptodate
     x17b3c6c5f2f97a8a(["narw_seasonal_management_areas"]):::uptodate --> xfd50dd5ee08cb00e(["yesterday"]):::uptodate
+    xe2cc1738a9b9cdfb(["slow_zones"]):::uptodate --> xfd50dd5ee08cb00e(["yesterday"]):::uptodate
     x5fc1f85cdae42a15(["whale_detections"]):::uptodate --> xfd50dd5ee08cb00e(["yesterday"]):::uptodate
     x6f114575981f728f>"r4w_scrape"]:::uptodate --> xc1ace7b91afbb712["whale_detections_raw"]:::uptodate
     xbc96fea7a3a6c834(["rtwb_urls"]):::uptodate --> xc1ace7b91afbb712["whale_detections_raw"]:::uptodate
@@ -93,15 +96,18 @@ graph LR
     xd4e3cb7cdf26cbd3(["last_week"]):::uptodate --> x7b5b71e4271dec15(["flyway_dashboard"]):::uptodate
     xfd50dd5ee08cb00e(["yesterday"]):::uptodate --> x7b5b71e4271dec15(["flyway_dashboard"]):::uptodate
     x51f7d0055c0e8771(["coastline"]):::uptodate --> x9f056268bcaf484c(["coastline_midatl"]):::uptodate
+    xf3cf2ececfcedcb0>"scrape_slow_zones"]:::uptodate --> xe2cc1738a9b9cdfb(["slow_zones"]):::uptodate
     x9f056268bcaf484c(["coastline_midatl"]):::uptodate --> xb9ffe861cb7124d8(["day_before"]):::uptodate
     x29978318f74a1f1a>"flyway_plot"]:::uptodate --> xb9ffe861cb7124d8(["day_before"]):::uptodate
     x32f78397cebde190(["narw_critical_habitat"]):::uptodate --> xb9ffe861cb7124d8(["day_before"]):::uptodate
     x17b3c6c5f2f97a8a(["narw_seasonal_management_areas"]):::uptodate --> xb9ffe861cb7124d8(["day_before"]):::uptodate
+    xe2cc1738a9b9cdfb(["slow_zones"]):::uptodate --> xb9ffe861cb7124d8(["day_before"]):::uptodate
     x5fc1f85cdae42a15(["whale_detections"]):::uptodate --> xb9ffe861cb7124d8(["day_before"]):::uptodate
     x9f056268bcaf484c(["coastline_midatl"]):::uptodate --> xd4e3cb7cdf26cbd3(["last_week"]):::uptodate
     x006ddd8351612b3e>"flyway_plot_summary"]:::uptodate --> xd4e3cb7cdf26cbd3(["last_week"]):::uptodate
     x32f78397cebde190(["narw_critical_habitat"]):::uptodate --> xd4e3cb7cdf26cbd3(["last_week"]):::uptodate
     x17b3c6c5f2f97a8a(["narw_seasonal_management_areas"]):::uptodate --> xd4e3cb7cdf26cbd3(["last_week"]):::uptodate
+    xe2cc1738a9b9cdfb(["slow_zones"]):::uptodate --> xd4e3cb7cdf26cbd3(["last_week"]):::uptodate
     x5fc1f85cdae42a15(["whale_detections"]):::uptodate --> xd4e3cb7cdf26cbd3(["last_week"]):::uptodate
   end
   classDef uptodate stroke:#000000,color:#ffffff,fill:#354823;
