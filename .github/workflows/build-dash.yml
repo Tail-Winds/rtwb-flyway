@@ -79,7 +79,9 @@ jobs:
     
     - name: Update slow zone log
       run: Rscript -e 'sf::st_write(
-        cbind(slow_zones, crs = 4326, date_recorded = Sys.Date()),
+        cbind(
+          targets::tar_read(slow_zones), crs = 4326, date_recorded = Sys.Date()
+        ),
         "slow_zone_log.csv",
         layer_options = "GEOMETRY=AS_WKT", 
         append = T)'
